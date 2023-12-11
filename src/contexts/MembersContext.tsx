@@ -19,7 +19,7 @@ export type Member = {
   phone?: string;
 };
 
-type CreateMemberData = Omit<Member, "id">;
+type CreateOrEditMemberData = Omit<Member, "id">;
 
 type Feedback = {
   type: "add" | "edit";
@@ -30,9 +30,9 @@ type MembersState = {
   members: Member[];
   error: string;
   feedback: Feedback | null;
-  addNewMember: (data: CreateMemberData) => void;
-  editMember: (data: CreateMemberData) => void;
-  removeMember: (data?: Member) => void;
+  addNewMember: (data: CreateOrEditMemberData) => void;
+  editMember: (data: CreateOrEditMemberData) => void;
+  removeMember: (data: Member) => void;
   clearFeedBackAndErrors: () => void;
 };
 
@@ -58,7 +58,7 @@ function MembersProvider({ children }: MembersProviderProps) {
   }, [members]);
 
   const addNewMember = useCallback(
-    (data: CreateMemberData) => {
+    (data: CreateOrEditMemberData) => {
       const isRegistered = members.findIndex((m) => m.doc === data.doc) !== -1;
       const id = String(new Date().getTime());
 
@@ -88,7 +88,7 @@ function MembersProvider({ children }: MembersProviderProps) {
   );
 
   const editMember = useCallback(
-    (data: CreateMemberData) => {
+    (data: CreateOrEditMemberData) => {
       const currentMembers = members.map((m) => {
         if (m.doc === data.doc) {
           return {
@@ -112,8 +112,8 @@ function MembersProvider({ children }: MembersProviderProps) {
   );
 
   const removeMember = useCallback(
-    (data?: Member) => {
-      const membersWithoutDeleted = members.filter((m) => m.doc !== data?.doc);
+    (data: Member) => {
+      const membersWithoutDeleted = members.filter((m) => m.doc !== data.doc);
 
       setMembers(membersWithoutDeleted);
       navigate("/");
@@ -162,4 +162,4 @@ function useMembersContext() {
   return context;
 }
 
-export { MembersContext, MembersProvider, useMembersContext };
+export { MembersProvider, useMembersContext };
