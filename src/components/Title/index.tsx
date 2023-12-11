@@ -1,8 +1,8 @@
 import { StyledTitle } from "./styles";
 
-type TitleProps = {
+interface TitleProps {
   text: string;
-};
+}
 
 export function Title({ text }: TitleProps) {
   return <StyledTitle>{text}</StyledTitle>;

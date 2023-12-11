@@ -9,7 +9,7 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 
-export type Member = {
+export interface Member {
   id: string;
   name: string;
   type: "fisica" | "juridica";
@@ -17,16 +17,16 @@ export type Member = {
   birth: string;
   income?: number;
   phone?: string;
-};
+}
 
 type CreateOrEditMemberData = Omit<Member, "id">;
 
-type Feedback = {
+interface Feedback {
   type: "add" | "edit";
   message: string;
-};
+}
 
-type MembersState = {
+interface MembersState {
   members: Member[];
   error: string;
   feedback: Feedback | null;
@@ -34,11 +34,11 @@ type MembersState = {
   editMember: (data: CreateOrEditMemberData) => void;
   removeMember: (data?: Member) => void;
   clearFeedBackAndErrors: () => void;
-};
+}
 
-type MembersProviderProps = {
+interface MembersProviderProps {
   children: ReactNode;
-};
+}
 
 const MembersContext = createContext<MembersState | null>(null);
 

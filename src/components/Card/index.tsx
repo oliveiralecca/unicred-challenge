@@ -4,9 +4,9 @@ import { useTheme } from "styled-components";
 import { Member } from "../../contexts/MembersContext";
 import { CardContainer } from "./styles";
 
-type CardProps = {
+interface CardProps {
   data: Member;
-};
+}
 
 export function Card({ data }: CardProps) {
   const theme = useTheme();

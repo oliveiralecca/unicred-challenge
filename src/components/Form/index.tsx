@@ -30,10 +30,10 @@ const newMemberFormValidationSchema = zod.object({
 
 type NewMemberFormData = zod.infer<typeof newMemberFormValidationSchema>;
 
-type FormProps = {
+interface FormProps {
   kind: "register" | "edit";
   currentMember?: Member;
-};
+}
 
 export function Form({ kind, currentMember }: FormProps) {
   const {
