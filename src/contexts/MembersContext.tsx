@@ -32,7 +32,7 @@ type MembersState = {
   feedback: Feedback | null;
   addNewMember: (data: CreateOrEditMemberData) => void;
   editMember: (data: CreateOrEditMemberData) => void;
-  removeMember: (data: Member) => void;
+  removeMember: (data?: Member) => void;
   clearFeedBackAndErrors: () => void;
 };
 
@@ -112,8 +112,8 @@ function MembersProvider({ children }: MembersProviderProps) {
   );
 
   const removeMember = useCallback(
-    (data: Member) => {
-      const membersWithoutDeleted = members.filter((m) => m.doc !== data.doc);
+    (data?: Member) => {
+      const membersWithoutDeleted = members.filter((m) => m.doc !== data?.doc);
 
       setMembers(membersWithoutDeleted);
       navigate("/");
