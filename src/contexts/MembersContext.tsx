@@ -43,7 +43,7 @@ interface MembersProviderProps {
 const MembersContext = createContext<MembersState | null>(null);
 
 function MembersProvider({ children }: MembersProviderProps) {
-  const storagedMembers = localStorage.getItem("members");
+  const storagedMembers = localStorage.getItem("@unicred-challenge:members");
   const membersObject = storagedMembers ? JSON.parse(storagedMembers) : [];
 
   const [members, setMembers] = useState<Member[]>(membersObject);
@@ -54,7 +54,7 @@ function MembersProvider({ children }: MembersProviderProps) {
 
   useEffect(() => {
     const membersString = JSON.stringify(members);
-    localStorage.setItem("members", membersString);
+    localStorage.setItem("@unicred-challenge:members", membersString);
   }, [members]);
 
   const addNewMember = useCallback(
